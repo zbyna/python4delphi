@@ -180,9 +180,9 @@ type
       const Arguments: TVarDataArray): Boolean; override;
     function GetProperty(var Dest: TVarData; const V: TVarData;
       const AName: string): Boolean; override;
-    function SetProperty(const V: TVarData; const AName: string;
+    function SetProperty(var V: TVarData; const AName: String; // const V:TvarData
       const Value: TVarData): Boolean; override;
-    procedure DispInvoke(Dest: PVarData; const Source: TVarData;
+    procedure DispInvoke(Dest: PVarData; var Source: TVarData;  //const Source: TVarData;
       CallDesc: PCallDesc; Params: Pointer); override;
   end;
 
@@ -933,7 +933,7 @@ const
 
 {$IFDEF USESYSTEMDISPINVOKE}
 procedure TPythonVariantType.DispInvoke(Dest: PVarData;
-  const Source: TVarData; CallDesc: PCallDesc; Params: Pointer);
+  var Source: TVarData; CallDesc: PCallDesc; Params: Pointer); //const Source: TVarData;
 {$IFDEF DELPHIXE2}
   //  Modified to correct memory leak QC102387
   procedure PatchedDispInvoke(Dest: PVarData;
@@ -1431,13 +1431,13 @@ function TPythonVariantType.EvalPython(const V: TVarData;
         if not Assigned(_value) then
           raise Exception.Create(SCantConvertValueToPythonObject);
           if PyList_Check(AObject) then
-            _result := PyList_SetItem( AObject, Variant(AKey), _value )
+            _result := PyList_SetItem( AObject, IntPtr(Variant(AKey)), _value )
           else if PyTuple_Check(AObject) then
-            _result := PyTuple_SetItem( AObject, Variant(AKey), _value )
+            _result := PyTuple_SetItem( AObject, IntPtr(Variant(AKey)), _value )
           else
             try
               if PySequence_Check(AObject) <> 0 then
-                _result := PySequence_SetItem(AObject, Variant(AKey), _value)
+                _result := PySequence_SetItem(AObject, IntPtr(Variant(AKey)), _value)
               else
                 _result := PyObject_SetItem( AObject, _key, _value );
             finally
@@ -1855,7 +1855,7 @@ begin
     Result := False;
 end;
 
-function TPythonVariantType.SetProperty(const V: TVarData;
+function TPythonVariantType.SetProperty(var V: TVarData;    // const V: TVarData
   const AName: string; const Value: TVarData): Boolean;
 var
   _newValue : PPyObject;
