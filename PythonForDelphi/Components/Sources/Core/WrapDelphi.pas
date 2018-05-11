@@ -1106,12 +1106,12 @@ end;
 {$IFDEF FPC}
 function GetPropValue(Instance: TObject; PropInfo: PPropInfo): Variant;
 begin
-  Result := Variants.GetPropValue(Instance, PropInfo,True);    // PropInfo^.Name
+  Result := Variants.GetPropValue(Instance, PropInfo, False);
 end;
 
 procedure SetPropValue(Instance: TObject; PropInfo: PPropInfo; const Value: Variant);
 begin
-  Variants.SetPropValue(Instance, PropInfo, Value);  // PropInfo^.Name
+  Variants.SetPropValue(Instance, PropInfo, Value);
 end;
 {$ENDIF}
 
@@ -1517,7 +1517,7 @@ function TPyDelphiObject.GetAttrO(key: PPyObject): PPyObject;
     Finally call inherited which calls PyObject_GenericGetAttr
 *)
 var
-  Name: ShortString;
+  Name: string;
 {$IFNDEF FPC}
   Info: PMethodInfoHeader;
 {$ENDIF}
@@ -1526,7 +1526,7 @@ var
 begin
   Result := nil;
   if GetPythonEngine.PyString_Check(Key) then
-    Name := ShortString(GetPythonEngine.PyString_AsDelphiString(Key))
+    Name := GetPythonEngine.PyString_AsDelphiString(Key)
   else
     Name := '';
 
@@ -1554,7 +1554,7 @@ begin
   else{$ENDIF} if Assigned(DelphiObject) and (Name <> '') then
   begin
     // Not a  method, try a property.
-    PropInfo := GetPropInfo(DelphiObject, string(Name));
+    PropInfo := GetPropInfo(DelphiObject, Name);
     if PropInfo <> nil then
     begin
       // we have a property
