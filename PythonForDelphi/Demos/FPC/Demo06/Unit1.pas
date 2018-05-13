@@ -8,7 +8,7 @@ uses
   SysUtils, Classes,
 {$IFDEF MSWINDOWS}
   Windows, Messages, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, ExtCtrls,
+  StdCtrls, ComCtrls, ExtCtrls, Menus,
 {$ENDIF}
 {$IFDEF LINUX}
   QForms, QDialogs, QStdCtrls, QControls, QExtCtrls,
@@ -249,7 +249,7 @@ begin
       // In the initialization of a new type, we must
       // define the attributes of this type
       PyType := TheType;
-      with PyType do
+      with  PyType do
         begin
           tp_basicsize := sizeof(PyPointRec);
           tp_dealloc   := PyPoint_dealloc;
@@ -260,7 +260,7 @@ begin
         end;
         TheType := PyType;
       // And then add the methods of the object, if needed
-      AddMethod( 'OffsetBy', PyPoint_OffsetBy, 'OffsetBy(dx, dy)' );
+      AddMethod( 'OffsetBy', PyPoint_OffsetBy , 'OffsetBy(dx, dy)' );
     end;
 end;
 
