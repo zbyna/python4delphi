@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  StdCtrls, ExtCtrls, PairSplitter, PythonEngine, PythonGUIInputOutput;
+  StdCtrls, ExtCtrls, PairSplitter, PythonEngine, PythonGUIInputOutput,variants;
 
 type
 
@@ -63,13 +63,13 @@ begin
   Assert(VarIsPython(a));
   Assert(VarIsPythonNumber(a));
   Assert(VarIsPythonInteger(a));
-  Assert(Integer(a) = 2);
+  Assert(StrToIntDef(Trim(VarToStr(a)), 0) = 2);
 
   b := VarPythonCreate(3);
   Assert(VarIsPython(b));
   Assert(VarIsPythonNumber(b));
   Assert(VarIsPythonInteger(b));
-  Assert(Integer(b) = 3);
+  Assert(StrToIntDef(Trim(VarToStr(b)), 0) = 3);
 
   // arithmetic operations
   //----------------------
@@ -77,105 +77,105 @@ begin
   // addition
   c := a + b;
   // check result of operation
-  Assert( Integer(c) = 5 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 5 );
   // check that operation did not change the content of operands.
-  Assert(Integer(a) = 2);
-  Assert(Integer(b) = 3);
+  Assert(StrToIntDef(Trim(VarToStr(a)), 0) = 2);
+  Assert(StrToIntDef(Trim(VarToStr(b)), 0) = 3);
   // now with a litteral
-  c := a + b + 1;
-  Assert( Integer(c) = 6 );
-  c := a + 1 + b;
-  Assert( Integer(c) = 6 );
-  c := 1 + a + b;
-  Assert( Integer(c) = 6 );
+  c := StrToIntDef(Trim(VarToStr(a)), 0) + StrToIntDef(Trim(VarToStr(b)), 0) + 1;
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 6 );
+  c := StrToIntDef(Trim(VarToStr(a)), 0) + 1 + StrToIntDef(Trim(VarToStr(b)), 0);
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 6 );
+  c := 1 + StrToIntDef(Trim(VarToStr(a)), 0) + StrToIntDef(Trim(VarToStr(b)), 0);
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 6 );
 
   // substraction
   c := b - a;
-  Assert( Integer(c) = 1 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 1 );
   // now with a litteral
-  c := b - a - 1;
-  Assert( Integer(c) = 0 );
-  c := b - 1 - a;
-  Assert( Integer(c) = 0 );
-  c := 1 - b - a;
-  Assert( Integer(c) = -4 );
+  c := StrToIntDef(Trim(VarToStr(b)), 0) - StrToIntDef(Trim(VarToStr(a)), 0) - 1;
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 0 );
+  c := StrToIntDef(Trim(VarToStr(b)), 0) - 1 - StrToIntDef(Trim(VarToStr(a)), 0);
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 0 );
+  c := 1 - StrToIntDef(Trim(VarToStr(b)), 0) - StrToIntDef(Trim(VarToStr(a)), 0);
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = -4 );
 
   // multiplication
   c := a * b;
-  Assert( Integer(c) = 6 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 6 );
   // now with a litteral
-  c := a * b * 2;
-  Assert( Integer(c) = 12 );
-  c := a * 2 * b;
-  Assert( Integer(c) = 12 );
-  c := 2 * a * b;
-  Assert( Integer(c) = 12 );
+  c := StrToIntDef(Trim(VarToStr(a)), 0) * StrToIntDef(Trim(VarToStr(b)), 0) * 2;
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 12 );
+  c := StrToIntDef(Trim(VarToStr(a)), 0) * 2 * StrToIntDef(Trim(VarToStr(b)), 0);
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 12 );
+  c := 2 * StrToIntDef(Trim(VarToStr(a)), 0) * StrToIntDef(Trim(VarToStr(b)), 0);
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 12 );
 
   // integer division
   c := b div a;
-  Assert( Integer(c) = 1 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 1 );
 
   // division: in Python a division between 2 integers is the same as the integer division
   c := b / a;
-  Assert( c = 1.5 );
-  Assert( Integer(c) = 2 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 1.5 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 2 );
 
   // modulus
   c := b mod a;
-  Assert( Integer(c) = 1 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 1 );
   c := BuiltinModule.divmod(b, a); // this returns a tuple whose first item is the result of the division,
                                    // and second item the modulo.
   if VarIsPythonSequence(c) and (c.Length = 2) then
   begin
-    Assert(Integer(c.GetItem(0)) = 1); // division
-    Assert(Integer(c.GetItem(1)) = 1); // modulo
+    Assert( StrToIntDef(Trim(VarToStr(c.getitem(0))), 0) = 1); // division
+    Assert(StrToIntDef(Trim(VarToStr(c.getitem(1))), 0) = 1); // modulo
   end;
 
   // power
   c := BuiltinModule.pow(a, b);
-  Assert(c = 8);
+  Assert(StrToIntDef(Trim(VarToStr(c)), 0) = 8);
 
   // negation
   c := -a;
-  Assert( Integer(c) = -2 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = -2 );
 
   // logical operations
   //------------------
 
   // inverse
   c := not a; // in python it would be: c = ~2
-  Assert( Integer(c) = -3 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = -3 );
 
   // shift left (<<)
   c := a shl b;
-  Assert( Integer(c) = 16 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 16 );
   c := a shl 1;
-  Assert( Integer(c) = 4 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 4 );
 
   // shift right (>>)
   c := a shl b;
   c := c shr b;
-  Assert( Integer(c) = Integer(a) );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = StrToIntDef(Trim(VarToStr(a)), 0) );
   c := b shr 1;
-  Assert( Integer(c) = 1 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = 1 );
 
   // and
   c := a and (a*5);
-  Assert( Integer(c) = Integer(a) );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = StrToIntDef(Trim(VarToStr(a)), 0) );
   c := a and 6;
-  Assert( Integer(c) = Integer(a) );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0) = StrToIntDef(Trim(VarToStr(a)), 0) );
 
   // or
   c := a or b;
-  Assert( Integer(c) = 3 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0)  = 3 );
   c := a or 3;
-  Assert( Integer(c) = 3 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0)  = 3 );
 
   // xor
   c := a xor b;
-  Assert( Integer(c) = 1 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0)  = 1 );
   c := a xor 3;
-  Assert( Integer(c) = 1 );
+  Assert( StrToIntDef(Trim(VarToStr(c)), 0)  = 1 );
 
   // comparisons
   //------------

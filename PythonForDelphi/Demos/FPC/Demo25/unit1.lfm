@@ -3,11 +3,13 @@ object Form1: TForm1
   Height = 522
   Top = 100
   Width = 795
+  ActiveControl = Memo1
   Caption = 'Form1'
   ClientHeight = 522
   ClientWidth = 795
+  DesignTimePPI = 134
   OnCreate = FormCreate
-  LCLVersion = '0.9.28.2'
+  Visible = False
   object Panel1: TPanel
     Left = 0
     Height = 522
@@ -16,6 +18,7 @@ object Form1: TForm1
     Align = alClient
     ClientHeight = 522
     ClientWidth = 795
+    ParentFont = False
     TabOrder = 0
     object Memo1: TMemo
       Left = 1
@@ -23,6 +26,7 @@ object Form1: TForm1
       Top = 1
       Width = 793
       Align = alTop
+      ParentFont = False
       TabOrder = 0
     end
     object PairSplitter1: TPairSplitter
@@ -61,7 +65,7 @@ object Form1: TForm1
         '  def __init__(Self, Value=0):'
         '    Self.Value = Value'
         '  def __del__(Self):'
-        '    print "delete", Self'
+        '    print( "delete", Self)'
         '  def __add__(self, other):'
         '    return Foo(self.Value + other.Value)'
         '  def Inc(Self, AValue = 1):'
@@ -85,13 +89,14 @@ object Form1: TForm1
         '  return [a, b, c, d]'
         ''
         'f = Foo()'
-        'print "Created", f'
+        'print( "Created", f)'
         'f.Inc()'
         'f.Inc(2)'
         'b = Bar()'
         'b.Inc()'
         'b.Inc(2)'
       )
+      ParentFont = False
       TabOrder = 2
     end
     object Panel2: TPanel
@@ -102,6 +107,7 @@ object Form1: TForm1
       Align = alBottom
       ClientHeight = 113
       ClientWidth = 793
+      ParentFont = False
       TabOrder = 3
       object Button1: TButton
         Left = 15
@@ -110,6 +116,7 @@ object Form1: TForm1
         Width = 75
         Caption = 'Execute'
         OnClick = Button1Click
+        ParentFont = False
         TabOrder = 0
       end
       object btnTestIntegers: TButton
@@ -119,29 +126,31 @@ object Form1: TForm1
         Width = 75
         Caption = 'Test Integers'
         OnClick = btnTestIntegersClick
+        ParentFont = False
         TabOrder = 1
       end
       object cbTestIntegers: TCheckBox
         Left = 122
-        Height = 19
+        Height = 24
         Top = 41
-        Width = 66
+        Width = 81
         Caption = 'Included'
+        ParentFont = False
         TabOrder = 2
       end
     end
   end
   object PythonEngine1: TPythonEngine
     IO = PythonGUIInputOutput1
-    left = 96
-    top = 48
+    Left = 96
+    Top = 48
   end
   object PythonGUIInputOutput1: TPythonGUIInputOutput
     DelayWrites = True
     UnicodeIO = False
     RawOutput = False
     Output = Memo1
-    left = 338
-    top = 48
+    Left = 338
+    Top = 48
   end
 end
