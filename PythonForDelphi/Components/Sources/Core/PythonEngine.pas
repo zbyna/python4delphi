@@ -90,7 +90,9 @@ uses
 {$ELSE}
   TinyWideStrings,
 {$ENDIF}
-  MethodCallBack;
+  MethodCallBack,
+  Dialogs,
+  Forms ;
 
 //#######################################################
 //##                                                   ##
@@ -3362,10 +3364,10 @@ var
 {$ENDIF}
 begin
   Result := DllPath;
-
   {$IFDEF MSWINDOWS}
   if DLLPath = '' then begin
-    IsPythonVersionRegistered(RegVersion, Result, AllUserInstall);
+     DllPath:= ExtractFilePath(Application.ExeName);
+    //IsPythonVersionRegistered(RegVersion, Result, AllUserInstall);
   end;
   {$ENDIF}
 
@@ -3386,7 +3388,7 @@ begin
   FDLLHandle := 0;
 
   DoOpenDll(aDllName);
-
+  //showmessage(format('path: %s name: %s',[dllPath,DllName]));
   if not IsHandleValid then begin
 {$IFDEF MSWINDOWS}
     s := Format('Error %d: Could not open Dll "%s"',[GetLastError, DllName]);
