@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="9"/>
+    <Version Value="10"/>
     <PathDelim Value="\"/>
     <General>
       <Flags>
@@ -15,9 +15,6 @@
     <i18n>
       <EnableI18N LFM="False"/>
     </i18n>
-    <VersionInfo>
-      <StringTable ProductVersion=""/>
-    </VersionInfo>
     <BuildModes Count="1" Active="Default">
       <Item1 Name="Default" Default="True"/>
     </BuildModes>
@@ -46,7 +43,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="3"/>
         <CursorPos Y="15"/>
-        <UsageCount Value="109"/>
+        <UsageCount Value="110"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit0>
@@ -56,9 +53,10 @@
         <ComponentName Value="Form1"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="Unit1"/>
-        <CursorPos X="48" Y="72"/>
-        <UsageCount Value="55"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="106"/>
+        <CursorPos X="42" Y="56"/>
+        <UsageCount Value="56"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -69,17 +67,16 @@
         <ComponentName Value="TestForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="Unit2"/>
         <EditorIndex Value="2"/>
+        <TopLine Value="22"/>
         <CursorPos X="3" Y="8"/>
-        <UsageCount Value="55"/>
+        <UsageCount Value="56"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\..\..\Components\Sources\Core\WrapDelphi.pas"/>
-        <UnitName Value="WrapDelphi"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="292"/>
         <CursorPos X="27" Y="292"/>
@@ -95,7 +92,6 @@
       </Unit4>
       <Unit5>
         <Filename Value="..\..\..\Components\Sources\Core\WrapDelphiWindows.pas"/>
-        <UnitName Value="WrapDelphiWindows"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="51"/>
         <CursorPos X="10" Y="64"/>
@@ -104,9 +100,7 @@
       </Unit5>
       <Unit6>
         <Filename Value="..\..\..\Components\Sources\Core\WrapDelphiGraphics.pas"/>
-        <UnitName Value="WrapDelphiGraphics"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="554"/>
         <CursorPos Y="572"/>
         <UsageCount Value="16"/>
         <Loaded Value="True"/>
@@ -135,7 +129,6 @@
       </Unit9>
       <Unit10>
         <Filename Value="..\..\..\Components\Sources\Core\WrapDelphiForms.pas"/>
-        <UnitName Value="WrapDelphiForms"/>
         <EditorIndex Value="5"/>
         <CursorPos X="14" Y="9"/>
         <UsageCount Value="15"/>
@@ -144,7 +137,6 @@
       </Unit10>
       <Unit11>
         <Filename Value="..\..\..\Components\Sources\Core\WrapDelphiComCtrls.pas"/>
-        <UnitName Value="WrapDelphiComCtrls"/>
         <EditorIndex Value="6"/>
         <TopLine Value="595"/>
         <CursorPos X="36" Y="605"/>
@@ -161,7 +153,6 @@
       </Unit12>
       <Unit13>
         <Filename Value="..\..\..\Components\Sources\Core\WrapDelphiExtCtrls.pas"/>
-        <UnitName Value="WrapDelphiExtCtrls"/>
         <EditorIndex Value="7"/>
         <TopLine Value="101"/>
         <CursorPos Y="119"/>
@@ -185,9 +176,7 @@
       </Unit15>
       <Unit16>
         <Filename Value="..\..\..\Components\Sources\Core\WrapDelphiGrids.pas"/>
-        <UnitName Value="WrapDelphiGrids"/>
         <EditorIndex Value="8"/>
-        <TopLine Value="250"/>
         <CursorPos X="43" Y="260"/>
         <UsageCount Value="14"/>
         <Loaded Value="True"/>
@@ -238,8 +227,6 @@
       </Unit22>
       <Unit23>
         <Filename Value="..\..\..\Components\Sources\Core\PythonEngine.pas"/>
-        <UnitName Value="PythonEngine"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="131"/>
         <CursorPos X="33" Y="143"/>
