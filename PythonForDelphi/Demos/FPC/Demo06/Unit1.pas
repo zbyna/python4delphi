@@ -173,9 +173,10 @@ begin
       else
         begin
           // Else check for a method
-          Result := Py_FindMethod( MethodsByName('PythonType1'), obj, key);
+          Result:=PyObject_GenericGetAttr(obj,PyString_FromString('OffsetBy'));
+          //Result := Py_FindMethod( MethodsByName('PythonType1'), obj, key);
           // or we could write, because it's quicker:
-          // Result := Py_FindMethod( Form1.PythonType1.MethodsData, obj, key);
+          //Result := Py_FindMethod( Form1.PythonType1.MethodsData, obj, key);
           if not Assigned(Result) then
             PyErr_SetString (PyExc_AttributeError^, PAnsiChar(Format('Unknown attribute "%s"',[key])));
         end;
@@ -261,6 +262,7 @@ begin
         TheType := PyType;
       // And then add the methods of the object, if needed
       AddMethod( 'OffsetBy', PyPoint_OffsetBy , 'OffsetBy(dx, dy)' );
+      PythonEngine1.PyType_Ready(TheTypePtr);
     end;
 end;
 
